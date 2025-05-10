@@ -1,0 +1,76 @@
+{
+  "name": "ai",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "electron:renderer": "vite build --config electron/renderer/vite.config.ts",
+    "electron:dev": "npm run electron:renderer && electron .",
+    "electron": "electron electron/main.cjs",
+    "dist": "npm run electron:renderer && electron-builder"
+  },
+  "dependencies": {
+    "@ffmpeg/core": "^0.12.4",
+    "@ffmpeg/ffmpeg": "^0.12.7",
+    "@ffmpeg/util": "^0.12.1",
+    "@uploadthing/react": "^7.3.0",
+    "file-saver": "^2.0.5",
+    "firebase": "^11.6.1",
+    "jspdf": "^3.0.1",
+    "jszip": "^3.10.1",
+    "lucide-react": "^0.507.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-dropzone": "^14.3.8",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^6.30.0",
+    "tesseract.js": "^6.0.1",
+    "uploadthing": "^7.6.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.22.0",
+    "@tailwindcss/cli": "^4.1.5",
+    "@tailwindcss/postcss": "^4.1.5",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.4.1",
+    "autoprefixer": "^10.4.21",
+    "electron": "^29.3.0",
+    "electron-builder": "^24.6.0",
+    "eslint": "^9.22.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^16.0.0",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.26.1",
+    "vite": "^6.3.5"
+  },
+  "main": "electron/main.cjs",
+  "build": {
+    "appId": "com.snapnotes.desktop",
+    "productName": "SnapNotes AI Desktop",
+    "files": [
+      "electron/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}

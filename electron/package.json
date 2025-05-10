@@ -1,0 +1,44 @@
+{
+  "name": "snapnotes-desktop",
+  "version": "1.0.0",
+  "description": "SnapNotes AI Desktop App",
+  "main": "dist/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "concurrently \"npm run dev:renderer\" \"npm run dev:main\"",
+    "dev:renderer": "cd renderer && npm run dev",
+    "dev:main": "tsc -p tsconfig.json && electron .",
+    "build": "npm run build:renderer && npm run build:main",
+    "build:renderer": "cd renderer && npm run build",
+    "build:main": "tsc -p tsconfig.json",
+    "package": "electron-builder build --win",
+    "publish": "electron-builder publish --win"
+  },
+  "author": "SnapNotes AI",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "electron-updater": "^6.1.7",
+    "firebase": "^10.7.1",
+    "firebase-admin": "^12.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.4",
+    "concurrently": "^8.2.2",
+    "electron": "^28.1.0",
+    "electron-builder": "^24.9.1",
+    "typescript": "^5.3.3"
+  },
+  "build": {
+    "appId": "com.snapnotes.ai",
+    "productName": "SnapNotes AI",
+    "win": {
+      "target": ["nsis"],
+      "icon": "build/icon.ico"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "your-github-username",
+      "repo": "snapnotes-desktop"
+    }
+  }
+} 
