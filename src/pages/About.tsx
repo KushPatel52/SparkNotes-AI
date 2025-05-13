@@ -62,8 +62,7 @@ export default function About() {
         <div className="text-lg sm:text-xl md:text-2xl leading-relaxed space-y-4 md:space-y-6 max-w-xl md:max-w-2xl text-center">
           <p className="italic text-gray-700">
             I'm Kush Patel, an AI‑obsessed developer who loves turning rough
-            ideas into polished, accessible tools. (Replace this paragraph
-            with your own story, background, and fun facts!)
+            ideas into polished, accessible tools.
           </p>
         </div>
       </section>

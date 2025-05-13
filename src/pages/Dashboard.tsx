@@ -55,6 +55,9 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-[#0f2027] via-[#232526] to-[#414345] relative overflow-hidden">
+      <div className="p-4 bg-yellow-900/80 border-l-4 border-yellow-500 rounded mb-6 text-yellow-200 font-semibold text-center">
+        Note: The SnapNotes AI Desktop app is built, but cannot be distributed due to developer program costs required by Apple and Microsoft. We hope to make it available soon!
+      </div>
       {/* Animated background shapes */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[400px] h-[400px] bg-teal-500 opacity-20 rounded-full blur-3xl animate-pulse" />
