@@ -1,9 +1,8 @@
-import { Plus, Film, Trash2, Loader2, Upload } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { useState, useEffect } from "react";
-import { useLectures } from "../hooks/useLectures";
 import { useNotes } from "../hooks/useNotes";
 
 interface Job {
@@ -15,19 +14,13 @@ interface Job {
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const { lectures, loading, error, deleteLecture } = useLectures();
   const { notes, loading: notesLoading, error: notesError } = useNotes();
-  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [jobs, setJobs] = useState<Job[]>([]);
 
   useEffect(() => {
     console.log('Dashboard component mounted');
     console.log('Current user:', auth.currentUser?.uid);
   }, []);
-
-  useEffect(() => {
-    console.log('Upload modal state changed:', isUploadModalOpen);
-  }, [isUploadModalOpen]);
 
   useEffect(() => {
     async function fetchJobs() {
@@ -42,15 +35,6 @@ export default function Dashboard() {
     console.log('Sign out clicked');
     await signOut(auth);
     navigate("/");
-  }
-
-  async function handleDeleteLecture(lectureId: string) {
-    if (!confirm("Are you sure you want to delete this lecture?")) return;
-    try {
-      await deleteLecture(lectureId);
-    } catch (err) {
-      console.error("Failed to delete lecture:", err);
-    }
   }
 
   return (

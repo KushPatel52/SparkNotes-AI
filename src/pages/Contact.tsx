@@ -6,7 +6,7 @@ export default function Contact() {
 
   return (
     <>
-      <NavBar />
+      <NavBar onAuthClick={() => {/* TODO: implement auth modal or redirect */}} />
 
       {/* hero‑style wrapper */}
       <section className="min-h-screen w-full bg-hero flex items-start pt-28 pb-40">
@@ -19,7 +19,7 @@ export default function Contact() {
 
           {/* optional blurb */}
           <p className="text-white/80 text-lg mb-16 max-w-2xl">
-            Have questions or feedback? Drop us a line and we’ll get back to you within 24 hours.
+            Have questions or feedback? Drop us a line and we'll get back to you within 24 hours.
           </p>
 
           {/* Two‑column form card */}

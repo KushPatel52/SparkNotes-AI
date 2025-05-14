@@ -13,45 +13,6 @@ function getFFmpeg() {
   return ffmpegSingleton;
 }
 
-// Helper: Compare two images (Uint8ClampedArray pixel data) for difference
-function isSignificantlyDifferent(data1: Uint8ClampedArray, data2: Uint8ClampedArray, threshold = 0.08) {
-  if (!data1 || !data2 || data1.length !== data2.length) return true;
-  let diff = 0;
-  for (let i = 0; i < data1.length; i++) {
-    diff += Math.abs(data1[i] - data2[i]);
-  }
-  const avgDiff = diff / data1.length / 255;
-  return avgDiff > threshold;
-}
-
-// Helper: Preprocess image (grayscale + contrast)
-async function preprocessImage(blob: Blob): Promise<Blob> {
-  return new Promise((resolve) => {
-    const img = new window.Image();
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = img.width;
-      canvas.height = img.height;
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return resolve(blob);
-      ctx.drawImage(img, 0, 0);
-      // Grayscale
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      for (let i = 0; i < imageData.data.length; i += 4) {
-        const avg = (imageData.data[i] + imageData.data[i+1] + imageData.data[i+2]) / 3;
-        // Increase contrast
-        const contrast = 1.5;
-        const contrasted = (avg - 128) * contrast + 128;
-        imageData.data[i] = imageData.data[i+1] = imageData.data[i+2] = contrasted;
-      }
-      ctx.putImageData(imageData, 0, 0);
-      canvas.toBlob((b) => resolve(b || blob), 'image/jpeg', 0.95);
-    };
-    img.onerror = () => resolve(blob);
-    img.src = URL.createObjectURL(blob);
-  });
-}
-
 export function useLocalNotesGenerator() {
   const [progress, setProgress] = useState(0);
   const [status, setStatus] = useState<string | null>(null);

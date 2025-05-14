@@ -1,8 +1,14 @@
+// Add this at the top of your project (e.g., in a global.d.ts file or at the top of this file)
+// declare module 'file-saver';
+
 import { useState, useRef, useEffect } from "react";
 import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
+
+// If you get a type error for 'file-saver', add a file src/global.d.ts with:
+// declare module 'file-saver';
 
 export default function FrameExtractor() {
   const [loading, setLoading] = useState(false);

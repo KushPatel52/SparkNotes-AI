@@ -33,7 +33,7 @@ export function useNotes() {
         setNotes(notesData);
         setLoading(false);
       })
-      .catch(err => {
+      .catch(() => {
         setError('Failed to load notes');
         setLoading(false);
       });

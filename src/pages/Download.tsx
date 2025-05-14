@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
@@ -9,7 +9,6 @@ import app2 from '../assets/app-2.jpg';
 import app3 from '../assets/app-3.jpg';
 
 export default function Download() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
@@ -21,7 +20,7 @@ export default function Download() {
         // Check if user has a subscription
         const userDoc = await getDoc(doc(db, 'users', user.uid));
         if (userDoc.exists() && userDoc.data().subscription) {
-          setIsAuthenticated(true);
+          // setIsAuthenticated(true);
         } else {
           navigate('/pricing');
         }

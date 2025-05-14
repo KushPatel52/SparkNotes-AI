@@ -4,7 +4,7 @@ import kushImg from "../assets/Kush.jpg";
 export default function About() {
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      <NavBar />
+      <NavBar onAuthClick={() => {/* TODO: implement auth modal or redirect */}} />
 
       {/* ------------- Section 1 : How it works ------------- */}
       <section className="w-full bg-blue-900 text-white flex flex-col items-center py-16 md:py-32 flex-shrink-0 min-h-[60vh]">

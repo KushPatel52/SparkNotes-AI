@@ -1,6 +1,6 @@
 console.log("NavBar v2 loaded");
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { FiMenu } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";

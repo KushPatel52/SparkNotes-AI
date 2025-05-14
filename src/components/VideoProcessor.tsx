@@ -17,7 +17,6 @@ export default function VideoProcessor({ onVideoUpload }: VideoProcessorProps) {
   const { generateNotes, progress, status, error } = useLocalNotesGenerator();
   const { addNote } = useNotes();
   const [processing, setProcessing] = useState(false);
-  const [retryCount, setRetryCount] = useState(0);
   const [lastError, setLastError] = useState<string | null>(null);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,13 +37,13 @@ export default function VideoProcessor({ onVideoUpload }: VideoProcessorProps) {
     try {
       const result = await generateNotes(file);
       setNotesReady(true);
-      setNotesUrl(result.pdfUrl);
-      setNotesText(result.notesText);
+      if (result && result.pdfUrl) setNotesUrl(result.pdfUrl);
+      if (result && result.notesText) setNotesText(result.notesText);
       // Save to Firestore if signed in
-      if (auth.currentUser) {
+      if (auth.currentUser && result && typeof result.pdfUrl === 'string') {
         await addNote(file.name.replace(/\.[^/.]+$/, '') + ' Notes', result.pdfUrl);
         setSaveError(null);
-      } else {
+      } else if (!auth.currentUser) {
         setSaveError('Sign in to save your notes to your account.');
       }
     } catch (err: any) {
@@ -57,7 +56,6 @@ export default function VideoProcessor({ onVideoUpload }: VideoProcessorProps) {
   };
 
   const handleRetry = () => {
-    setRetryCount(prev => prev + 1);
     if (file) {
       handleFileUpload({ target: { files: [file] } } as any);
     }
@@ -99,7 +97,7 @@ export default function VideoProcessor({ onVideoUpload }: VideoProcessorProps) {
           {file && (
             <div className="mt-2 text-xs text-gray-500">
               File size: {(file.size / (1024 * 1024)).toFixed(1)}MB
-              {navigator.deviceMemory && (
+              {typeof (navigator as any).deviceMemory !== 'undefined' && (
                 <span className="ml-2">
                   • Available memory: {(navigator as any).deviceMemory}GB
                 </span>

@@ -1,24 +1,9 @@
 import NavBar from "../components/NavBar";
 import VideoProcessor from "../components/VideoProcessor";
-import VideoCard from "../components/VideoCard";
-import { useState } from "react";
-
-interface UploadedVideo {
-  filename: string;
-  status: 'pending' | 'ready';
-  videoUrl: string;
-}
 
 export default function LocalVideoProcessor({ onAuthClick }: { onAuthClick: () => void }) {
-  const [uploadedVideos, setUploadedVideos] = useState<UploadedVideo[]>([]);
-
   // Callback to add a new video card
-  const handleVideoUpload = (file: File, videoUrl: string) => {
-    setUploadedVideos((prev) => [
-      { filename: file.name, status: 'pending', videoUrl },
-      ...prev,
-    ]);
-  };
+  const handleVideoUpload = () => {};
 
   return (
     <>

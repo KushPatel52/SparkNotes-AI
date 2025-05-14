@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface VideoCardProps {
   filename: string;
   status: 'pending' | 'ready';

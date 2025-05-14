@@ -1,0 +1,2 @@
+2c74df57e3ac573d27f52828e0e48461bc8ee526 187762970 SnapNotesAI-Desktop-mac-arm64.dmg
+c4f940a63597a95629e94ca23ce6df3db0c90c2d 668788096 tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf
